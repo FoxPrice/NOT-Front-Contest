@@ -1,44 +1,44 @@
 {
-  "name": "ton-contest",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "lint": "eslint . --fix",
-    "preview": "vite preview",
-    "format": "prettier --write .",
-    "prepare": "husky"
-  },
-  "dependencies": {
-    "@reduxjs/toolkit": "^2.8.2",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0",
-    "react-redux": "^9.2.0",
-    "react-router-dom": "^7.6.2"
-  },
-  "devDependencies": {
-    "@eslint/js": "^9.25.0",
-    "@types/react": "^19.1.2",
-    "@types/react-dom": "^19.1.2",
-    "@typescript-eslint/eslint-plugin": "^8.33.1",
-    "@vitejs/plugin-react": "^4.4.1",
-    "autoprefixer": "^10.4.21",
-    "eslint": "^9.28.0",
-    "eslint-plugin-check-file": "^3.3.0",
-    "eslint-plugin-import": "^2.31.0",
-    "eslint-plugin-prettier": "^5.4.1",
-    "eslint-plugin-react": "^7.37.5",
-    "eslint-plugin-react-hooks": "^5.2.0",
-    "eslint-plugin-react-refresh": "^0.4.19",
-    "globals": "^16.0.0",
-    "husky": "^9.1.7",
-    "postcss": "^8.5.4",
-    "sass": "^1.89.1",
-    "tailwindcss": "^3.4.17",
-    "typescript": "^5.8.3",
-    "vite": "^6.3.5",
-    "vite-plugin-svgr": "^4.3.0"
-  }
+    "name": "ton-contest",
+    "private": true,
+    "version": "0.0.0",
+    "type": "module",
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build",
+        "lint": "eslint . --fix",
+        "preview": "vite preview",
+        "format": "prettier --write .",
+        "prepare": "husky"
+    },
+    "dependencies": {
+        "@reduxjs/toolkit": "^2.8.2",
+        "react": "^19.1.0",
+        "react-dom": "^19.1.0",
+        "react-redux": "^9.2.0",
+        "react-router-dom": "^7.6.2"
+    },
+    "devDependencies": {
+        "@eslint/js": "^9.25.0",
+        "@types/react": "^19.1.2",
+        "@types/react-dom": "^19.1.2",
+        "@typescript-eslint/eslint-plugin": "^8.33.1",
+        "@vitejs/plugin-react": "^4.4.1",
+        "autoprefixer": "^10.4.21",
+        "eslint": "^9.28.0",
+        "eslint-plugin-check-file": "^3.3.0",
+        "eslint-plugin-import": "^2.31.0",
+        "eslint-plugin-prettier": "^5.4.1",
+        "eslint-plugin-react": "^7.37.5",
+        "eslint-plugin-react-hooks": "^5.2.0",
+        "eslint-plugin-react-refresh": "^0.4.19",
+        "globals": "^16.0.0",
+        "husky": "^9.1.7",
+        "postcss": "^8.5.4",
+        "sass": "^1.89.1",
+        "tailwindcss": "^3.4.17",
+        "typescript": "^5.8.3",
+        "vite": "^6.3.5",
+        "vite-plugin-svgr": "^4.3.0"
+    }
 }
