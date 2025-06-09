@@ -8,7 +8,8 @@
     "build": "vite build",
     "lint": "eslint . --fix",
     "preview": "vite preview",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "prepare": "husky"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.8.2",
