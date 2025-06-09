@@ -11,15 +11,26 @@ const __dirname = dirname(__filename);
 
 const compat = new FlatCompat({
     baseDirectory: __dirname,
+    recommendedConfig: {},
 });
 
 const eslintConfig = [
-    ...compat.extends('next/core-web-vitals', 'next/typescript'),
+    ...compat.extends(
+        'eslint:recommended',
+        'plugin:react/recommended',
+        'plugin:react-hooks/recommended',
+        'plugin:@typescript-eslint/recommended',
+    ),
     {
         plugins: {
             prettier: PrettierPlugin,
             'check-file': CheckFile,
             import: ImportPlugin,
+        },
+        settings: {
+            react: {
+                version: 'detect',
+            },
         },
         rules: {
             'check-file/filename-naming-convention': [
@@ -38,6 +49,7 @@ const eslintConfig = [
                     './*/': 'CAMEL_CASE',
                 },
             ],
+            'react/react-in-jsx-scope': 'off',
             'no-console': 'warn',
             'react/prop-types': 'off',
             'react/display-name': [0],
@@ -47,21 +59,24 @@ const eslintConfig = [
                 {
                     alphabetize: {
                         order: 'asc',
-                        caseInsensitive: false,
+                        caseInsensitive: true,
                     },
                     'newlines-between': 'always',
                     groups: [
                         'builtin',
                         'external',
                         'internal',
-                        ['parent', 'sibling'],
+                        'parent',
+                        'sibling',
                         'index',
+                        'object',
                         'type',
                     ],
                     pathGroups: [
                         {
                             pattern: 'react',
                             group: 'builtin',
+                            position: 'before',
                         },
                         {
                             pattern: 'react-router-dom',
@@ -83,20 +98,25 @@ const eslintConfig = [
                         },
                         {
                             pattern: '@/types/**',
-                            group: 'internal',
+                            group: 'type',
                         },
                         {
                             pattern: '@/styles/**',
-                            group: 'internal',
+                            group: 'object',
+                            position: 'before',
                         },
                         {
                             pattern: '@/assets/**',
-                            group: 'internal',
+                            group: 'object',
+                        },
+                        {
+                            pattern: '~/**',
+                            group: 'object',
                             position: 'after',
                         },
                     ],
                     distinctGroup: true,
-                    pathGroupsExcludedImportTypes: ['object'],
+                    pathGroupsExcludedImportTypes: ['react'],
                 },
             ],
             'prettier/prettier': ['error', { endOfLine: 'auto' }],
