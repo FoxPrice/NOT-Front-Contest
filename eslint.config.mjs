@@ -36,7 +36,8 @@ const eslintConfig = [
             'check-file/filename-naming-convention': [
                 'error',
                 {
-                    '**/*.{jsx,tsx,js,ts,png,svg}': 'KEBAB_CASE',
+                    './src/hooks/**/*.{ts,tsx}': 'CAMEL_CASE',
+                    './src/**/!(*hooks)/**/*.{jsx,tsx,js,ts,png,svg}': 'KEBAB_CASE',
                     '**/*.{config}.*': 'KEBAB_CASE',
                 },
                 {
@@ -46,7 +47,7 @@ const eslintConfig = [
             'check-file/folder-naming-convention': [
                 'error',
                 {
-                    './*/': 'CAMEL_CASE',
+                    '**/*': 'CAMEL_CASE',
                 },
             ],
             'react/react-in-jsx-scope': 'off',

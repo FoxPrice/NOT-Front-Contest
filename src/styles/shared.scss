@@ -1,0 +1,24 @@
+.inner-container {
+    width: calc(100% - 32px);
+    margin: 0 auto;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.6;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.skeleton {
+    background-color: #2a2a2a;
+    animation: pulse 2s ease-in-out infinite;
+    user-select: none;
+}

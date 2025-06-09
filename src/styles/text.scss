@@ -1,0 +1,74 @@
+.title {
+    color: var(--text-primary, #FFF);
+    font-size: 26px;
+    line-height: 32px;
+    letter-spacing: 0.38px;
+}
+
+.subtitle,
+.cart-title {
+    font-size: 20px;
+    line-height: 24px;
+}
+
+.small-text {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: -0.2px;
+}
+
+.placeholder-title {
+    font-size: 26px;
+    line-height: 32px;
+    letter-spacing: 0.38px;
+}
+
+.product-description,
+.purchase-description,
+.placeholder-description,
+.input-text {
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 22px;
+    letter-spacing: -0.43px;
+}
+
+.purchase-title {
+    font-size: 36px;
+    line-height: 36px;
+    letter-spacing: 0.4px;
+}
+
+.product-info {
+    font-size: 12px;
+    line-height: 14px;
+    letter-spacing: -0.2px;
+}
+
+.button-text {
+    font-size: 17px;
+    line-height: 22px;
+    letter-spacing: -0.4px;
+}
+
+.small-button-text {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: -0.2px;
+}
+
+.cart-price {
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 22px;
+    letter-spacing: -0.43px;
+}
+
+.nav-menu-link {
+    font-size: 10px;
+    font-weight: 510;
+    line-height: 12px;
+    letter-spacing: 0.066px;
+}

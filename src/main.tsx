@@ -8,7 +8,7 @@ import { Provider } from 'react-redux';
 import '@/styles/index.scss';
 import { router } from '@/utils/router';
 
-import { store } from '@/store';
+import { store } from '@/slice';
 
 const rootElement = document.getElementById('root');
 
