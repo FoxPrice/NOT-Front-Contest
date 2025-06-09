@@ -1,11 +1,11 @@
 import { FC } from 'react';
 
-const Home: FC = () => {
+const Product: FC = () => {
     return (
         <div>
-            <h1>Home</h1>
+            <h1>Product</h1>
         </div>
     );
 };
 
-export default Home;
+export default Product;

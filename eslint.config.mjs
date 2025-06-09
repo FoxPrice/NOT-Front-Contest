@@ -83,6 +83,10 @@ const eslintConfig = [
                             group: 'builtin',
                         },
                         {
+                            pattern: '@reduxjs/toolkit',
+                            group: 'builtin',
+                        },
+                        {
                             pattern: '@/pages/**',
                             group: 'internal',
                             position: 'before',
@@ -93,8 +97,13 @@ const eslintConfig = [
                             position: 'before',
                         },
                         {
+                            pattern: '@/store/**',
+                            group: 'internal',
+                        },
+                        {
                             pattern: '@/utils/**',
                             group: 'internal',
+                            position: 'after',
                         },
                         {
                             pattern: '@/types/**',
