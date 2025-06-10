@@ -8,7 +8,7 @@ import NavigationMenu from '@/components/app/navigation-menu';
 const MainLayout: FC<PropsWithChildren> = () => {
     return (
         <div className="flex flex-col min-h-screen pb-[90px]">
-            <main className="mt-[46px] flex flex-1">
+            <main className="mt-[46px] flex flex-1 w-full">
                 <Outlet />
             </main>
 

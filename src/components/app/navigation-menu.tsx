@@ -16,8 +16,8 @@ const NavigationMenu: FC = () => {
     const isProfile = pathname === '/profile';
 
     return (
-        <nav className="fixed bottom-0 left-0 w-full h-[83px] bg-theme-color border-t-[0.33px] border-border-color">
-            <ul className="grid grid-cols-2 items-center py-[20px] pb-[34px] pt-[7px]">
+        <nav className="nav-menu fixed bottom-0 left-0 w-full h-[83px] bg-theme-color border-t-[0.33px] border-border-color">
+            <ul className="grid grid-cols-2 items-center py-[20px] pb-[34px] pt-[7px] max-w-[500px] mx-auto">
                 <li className="flex justify-center h-full">
                     <Link className={`flex flex-col items-center gap-[2px] w-[60px]`} to="/">
                         <NotIcon

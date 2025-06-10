@@ -23,3 +23,9 @@ export type CartSlice = {
     count: number;
     isLoading: boolean;
 };
+
+export type BaseSlice = {
+    searchInputValue: string;
+    isSearchInputFocused: boolean;
+    isCartOpen: boolean;
+};

@@ -1,59 +1,34 @@
-import { FC, useEffect, useRef, useState, useCallback } from 'react';
+import { FC, useRef } from 'react';
 
 import { useSelector } from 'react-redux';
 
+import HistoryEmptyState from '@/components/emptyState/history-empty-state';
 import HistoryCard from '@/components/profile/history-card';
-import HistoryEmptyState from '@/components/profile/history-empty-state';
 import HistorySkeleton from '@/components/skeletons/history-skeleton';
 
 import { CatalogItem } from '@/types/catalog-item';
 import { HistoryItem } from '@/types/history-item';
 import { CatalogSlice, HistorySlice } from '@/types/stores';
 
-import { selectHistory } from '@/slice/history-slice';
-import { selectProducts } from '@/slice/products-slice';
+import { useInfiniteScroll } from '@/hooks/useInfiniteScroll';
+import { selectHistorySlice } from '@/slice/history-slice';
+import { selectProductsSlice } from '@/slice/products-slice';
 
-const ITEMS_PER_LOAD = 25;
-
-type IntersectionCallback = (entries: IntersectionObserverEntry[]) => void;
+const ITEMS_PER_LOAD: number = 25;
 
 const History: FC = () => {
-    const historyData: HistorySlice = useSelector(selectHistory);
-    const productsData: CatalogSlice = useSelector(selectProducts);
-    const [visibleItems, setVisibleItems] = useState<number>(ITEMS_PER_LOAD);
+    const historyData: HistorySlice = useSelector(selectHistorySlice);
+    const productsData: CatalogSlice = useSelector(selectProductsSlice);
     const loadMoreRef = useRef<HTMLDivElement>(null);
 
     const history: HistoryItem[] | null = historyData.history;
     const products: CatalogItem[] | null = productsData.products;
 
-    const loadMore = useCallback((): void => {
-        if (history) {
-            setVisibleItems((prev) => Math.min(prev + ITEMS_PER_LOAD, history.length));
-        }
-    }, [history]);
-
-    useEffect(() => {
-        const observerCallback: IntersectionCallback = (entries) => {
-            const target = entries[0];
-            if (target.isIntersecting && history && visibleItems < history.length) {
-                loadMore();
-            }
-        };
-
-        const observer = new IntersectionObserver(observerCallback, { threshold: 0.1 });
-
-        const currentElement = loadMoreRef.current;
-
-        if (currentElement) {
-            observer.observe(currentElement);
-        }
-
-        return () => {
-            if (currentElement) {
-                observer.unobserve(currentElement);
-            }
-        };
-    }, [history, visibleItems, loadMore]);
+    const { visibleItems } = useInfiniteScroll({
+        totalItems: history?.length || 0,
+        itemsPerLoad: ITEMS_PER_LOAD,
+        targetRef: loadMoreRef,
+    });
 
     if (historyData.isLoading || productsData.isLoading) {
         return <HistorySkeleton />;

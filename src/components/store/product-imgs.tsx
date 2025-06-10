@@ -1,0 +1,56 @@
+import { FC } from 'react';
+
+import ImageWithPlaceholder from '@/components/app/image-with-placeholder';
+import ProductImgsDots from '@/components/store/imgs-slider-dots';
+
+import productImagePlaceholder from '@/assets/img/placeholder/product.jpg';
+
+import useImageSlider from '@/hooks/useImageSlider';
+
+const ProductImgs: FC<{ imgs: string[] }> = ({ imgs }) => {
+    const imgsLength = imgs.length;
+
+    const {
+        activeImageIndex,
+        isDragging,
+        handleTouchStart,
+        handleTouchEnd,
+        handleMouseDown,
+        handleMouseMove,
+        handleMouseUp,
+    } = useImageSlider(imgsLength);
+
+    return (
+        <div
+            className="relative flex w-full h-full select-none"
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
+            onMouseDown={handleMouseDown}
+            onMouseMove={handleMouseMove}
+            onMouseUp={handleMouseUp}
+            onMouseLeave={handleMouseUp}
+        >
+            {imgs.map((img, index) => (
+                <ImageWithPlaceholder
+                    key={`${img}-${index}`}
+                    src={img}
+                    alt=""
+                    placeholderImg={productImagePlaceholder}
+                    className="absolute top-0 left-0 w-full h-full"
+                    style={{
+                        opacity: index === activeImageIndex ? 1 : 0,
+                        transition: 'opacity 0.3s ease-in-out',
+                        cursor: isDragging ? 'grabbing' : 'grab',
+                    }}
+                />
+            ))}
+            <ProductImgsDots
+                className="absolute bottom-[8px] left-1/2 -translate-x-1/2"
+                length={imgsLength}
+                activeDotIndex={activeImageIndex}
+            />
+        </div>
+    );
+};
+
+export default ProductImgs;

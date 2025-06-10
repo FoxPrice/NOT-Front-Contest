@@ -1,16 +1,27 @@
 import { FC } from 'react';
 
-import productImagePlaceholder from '@/assets/img/placeholder/product.jpg';
+import { Link } from 'react-router-dom';
+
+import ProductImgs from '@/components/store/product-imgs';
 
 import { CatalogItem } from '@/types/catalog-item';
 
 const ProductCard: FC<{ product: CatalogItem }> = ({ product }) => {
-    if (!product) return <></>;
+    const handleSliderClick = (e: React.MouseEvent) => {
+        e.preventDefault();
+        e.stopPropagation();
+    };
+
+    const productPath: string = product.id.toString() ?? 'error';
 
     return (
-        <button className="flex flex-col gap-[8px]">
-            <div className="relative flex rounded-[16px] w-full aspect-square overflow-hidden">
-                <img className="w-full h-full" src={productImagePlaceholder} alt="" />
+        <Link to={`/product/${productPath}`} className="flex flex-col gap-[8px]">
+            <div
+                className="relative flex rounded-[16px] w-full aspect-square overflow-hidden"
+                onClick={handleSliderClick}
+                onMouseDown={handleSliderClick}
+            >
+                <ProductImgs imgs={product.images} />
             </div>
             <div className="flex flex-col gap-[2px] pl-[8px]">
                 <span className="text-start">{product.name}</span>
@@ -19,7 +30,7 @@ const ProductCard: FC<{ product: CatalogItem }> = ({ product }) => {
                     <span className="small-text text-secondary-text-color">{product.currency}</span>
                 </span>
             </div>
-        </button>
+        </Link>
     );
 };
 

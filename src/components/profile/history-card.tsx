@@ -1,5 +1,7 @@
 import { FC } from 'react';
 
+import { Link } from 'react-router-dom';
+
 import { formatDate } from '@/utils/format-date';
 
 import ImageWithPlaceholder from '../app/image-with-placeholder';
@@ -20,9 +22,13 @@ const HistoryCard: FC<HistoryItem & { product: CatalogItem | null }> = ({
     const productName: string = product?.name ?? 'Product name';
     const productCategory: string = product?.category ?? 'Product category';
     const productImage: string | undefined = product?.images[0] ?? '';
+    const productPath: string = product?.id.toString() ?? 'error';
 
     return (
-        <div className="grid grid-cols-[60px_1fr] gap-[12px] items-center justify-center w-full py-[4px]">
+        <Link
+            to={`/product/${productPath}`}
+            className="grid grid-cols-[60px_1fr] gap-[12px] items-center justify-center w-full py-[4px]"
+        >
             <ImageWithPlaceholder
                 className="rounded-[12px] h-[60px] w-[60px]"
                 src={productImage}
@@ -41,7 +47,7 @@ const HistoryCard: FC<HistoryItem & { product: CatalogItem | null }> = ({
                     <span>{`${total} ${currency}`}</span>
                 </div>
             </div>
-        </div>
+        </Link>
     );
 };
 

@@ -31,6 +31,6 @@ const productsSlice = createSlice({
 
 export const { setProducts, setIsProductLoading } = productsSlice.actions;
 
-export const selectProducts = (state: RootState): CatalogSlice => state.products;
+export const selectProductsSlice = (state: RootState): CatalogSlice => state.products;
 
 export default productsSlice.reducer;

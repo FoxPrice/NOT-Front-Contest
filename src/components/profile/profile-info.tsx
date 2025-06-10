@@ -8,11 +8,11 @@ import avatarPlaceholder from '@/assets/img/placeholder/avatar.png';
 
 import { TelegramWebAppUser } from '@/types/telegram-data';
 
-import { selectUser } from '@/slice/user-slice';
+import { selectUserSlice } from '@/slice/user-slice';
 
 const ProfileInfo: FC = () => {
     const avatar: string = '/avatar.png';
-    const userData: TelegramWebAppUser | null = useSelector(selectUser).userData;
+    const userData: TelegramWebAppUser | null = useSelector(selectUserSlice).userData;
 
     const userName: string = userData?.first_name ? userData.first_name : 'Profile';
 
