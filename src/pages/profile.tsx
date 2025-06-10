@@ -1,9 +1,13 @@
 import { FC } from 'react';
 
+import History from '@/components/profile/history';
+import ProfileInfo from '@/components/profile/profile-info';
+
 const Profile: FC = () => {
     return (
-        <div>
-            <h1>Profile</h1>
+        <div className="inner-container flex flex-col items-center justify-center">
+            <ProfileInfo />
+            <History />
         </div>
     );
 };

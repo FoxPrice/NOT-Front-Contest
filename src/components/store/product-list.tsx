@@ -5,12 +5,12 @@ import { useSelector } from 'react-redux';
 import ProductListSkeleton from '@/components/skeletons/product-list-skeleton';
 import ProductCard from '@/components/store/product-card';
 
-import { CatalogStore } from '@/types/stores';
+import { CatalogSlice } from '@/types/stores';
 
 import { selectProducts } from '@/slice/products-slice';
 
 const ProductList: FC = () => {
-    const productsInfo: CatalogStore = useSelector(selectProducts);
+    const productsInfo: CatalogSlice = useSelector(selectProducts);
 
     if (productsInfo.isLoading) {
         return <ProductListSkeleton />;
@@ -19,7 +19,7 @@ const ProductList: FC = () => {
     return (
         <section className="grid grid-cols-2 inner-container gap-y-[28px] gap-x-[12px]">
             {productsInfo.products.map((product) => (
-                <ProductCard key={product.id} product={product} />
+                <ProductCard key={`product-card-${product.id}`} product={product} />
             ))}
         </section>
     );

@@ -3,9 +3,9 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from './index';
 
 import { CartItem } from '@/types/cart-item';
-import { CartStore } from '@/types/stores';
+import { CartSlice } from '@/types/stores';
 
-const initialCartState: CartStore = {
+const initialCartState: CartSlice = {
     cart: [],
     count: 0,
     isLoading: false,
@@ -15,7 +15,7 @@ const cartSlice = createSlice({
     name: 'cart',
     initialState: initialCartState,
     reducers: {
-        addToCart: (state: CartStore, action: PayloadAction<CartItem>) => {
+        addToCart: (state: CartSlice, action: PayloadAction<CartItem>) => {
             const item = state.cart.find((item) => item.id === action.payload.id);
 
             if (item) {
@@ -34,7 +34,7 @@ const cartSlice = createSlice({
                 };
             }
         },
-        removeFromCart: (state: CartStore, action: PayloadAction<CartItem>) => {
+        removeFromCart: (state: CartSlice, action: PayloadAction<CartItem>) => {
             const item = state.cart.find((item) => item.id === action.payload.id);
 
             if (item && item.count === 1) {
@@ -53,7 +53,7 @@ const cartSlice = createSlice({
                 };
             }
         },
-        setIsLoading: (state: CartStore, action: PayloadAction<boolean>) => {
+        setIsLoading: (state: CartSlice, action: PayloadAction<boolean>) => {
             return {
                 ...state,
                 isLoading: action.payload,
@@ -64,6 +64,6 @@ const cartSlice = createSlice({
 
 export const { addToCart, removeFromCart, setIsLoading } = cartSlice.actions;
 
-export const selectCart = (state: RootState): CartStore => state.cart;
+export const selectCart = (state: RootState): CartSlice => state.cart;
 
 export default cartSlice.reducer;

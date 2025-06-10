@@ -1,7 +1,7 @@
-import { FC, useEffect, useState, useCallback } from 'react';
+import { FC, useEffect, useState, useCallback, useRef } from 'react';
 
 type ImageWithPlaceholderProps = {
-    className?: string;
+    className?: string | undefined;
     src?: string;
     alt?: string;
     placeholderImg: string;
@@ -13,32 +13,70 @@ const ImageWithPlaceholder: FC<ImageWithPlaceholderProps> = ({
     alt,
     placeholderImg,
 }) => {
+    const imgRef = useRef<HTMLImageElement | null>(null);
     const [imgSrc, setImgSrc] = useState<string | null>(null);
+    const [isLoading, setIsLoading] = useState<boolean>(true);
+    const [isVisible, setIsVisible] = useState<boolean>(false);
+
+    const handleLoadImg = (src: string, handleError: () => void): void => {
+        const img = new Image();
+        img.src = src;
+
+        img.onload = (): void => {
+            setImgSrc(src);
+            setIsLoading(false);
+        };
+
+        img.onerror = (): void => {
+            handleError();
+        };
+    };
 
     const loadPlaceholder = useCallback(() => {
         const placeholder = placeholderImg;
-        setImgSrc(placeholder);
+
+        handleLoadImg(placeholder, () => {
+            setIsLoading(false);
+        });
     }, [placeholderImg]);
 
     useEffect(() => {
-        const loadImage = async () => {
-            if (!src) {
-                loadPlaceholder();
-                return;
-            }
+        if (!isVisible) return;
 
-            try {
-                const imgModule = await import(src);
-                setImgSrc(imgModule.default);
-            } catch {
-                loadPlaceholder();
-            }
-        };
+        setIsLoading(true);
 
-        loadImage();
-    }, [src, loadPlaceholder]);
+        if (!src) {
+            return;
+        }
 
-    return <img className={className} src={imgSrc || src} alt={alt} onError={loadPlaceholder} />;
+        handleLoadImg(src, loadPlaceholder);
+    }, [src, loadPlaceholder, isVisible]);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setIsVisible(true);
+                    observer.disconnect();
+                }
+            },
+            {
+                rootMargin: '100px',
+            },
+        );
+
+        if (imgRef.current) {
+            observer.observe(imgRef.current);
+        }
+
+        return () => observer.disconnect();
+    }, []);
+
+    if (isLoading) {
+        return <div ref={imgRef} className={`skeleton ${className}`} />;
+    }
+
+    return <img className={className} src={imgSrc || ''} alt={alt} />;
 };
 
 export default ImageWithPlaceholder;

@@ -16,7 +16,7 @@ const ProductListSkeleton: FC = () => {
     return (
         <section className="grid grid-cols-2 inner-container gap-y-[28px] gap-x-[12px]">
             {Array.from({ length: 8 }).map((_, index) => (
-                <ProductCardSkeleton key={index} />
+                <ProductCardSkeleton key={`product-card-skeleton-${index}`} />
             ))}
         </section>
     );
