@@ -14,13 +14,13 @@ export const useTelegramInitialization = () => {
     const { setIsDark } = useTheme();
     const { tg, setTg } = useTelegramWebAppContext();
 
-    const handleGetTgWebApp = () => {
+    const handleGetTgWebApp = useCallback(() => {
         if (typeof window === 'undefined' || !window.Telegram?.WebApp) return;
         const telegram = window.Telegram?.WebApp;
         if (!telegram) return;
         setTg(telegram);
         return telegram;
-    };
+    }, [setTg]);
 
     const handleOpenFullScreen = useCallback(() => {
         if (!tg) return;
@@ -36,7 +36,7 @@ export const useTelegramInitialization = () => {
         if (!telegram) return;
         const isMobileDevice = telegram.platform === 'ios' || telegram.platform === 'android';
         dispatch(setIsMobileDevice(isMobileDevice));
-    }, [dispatch]);
+    }, [dispatch, handleGetTgWebApp]);
 
     useEffect(() => {
         if (!tg) return;

@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+
 import { useDispatch } from 'react-redux';
 
 import { ApiResponse } from '@/types/api-response';
@@ -24,4 +25,4 @@ export const useInitialProducts = () => {
 
         handleGetInitialProductsData();
     }, [dispatch]);
-}; 
+};
