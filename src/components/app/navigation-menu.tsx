@@ -1,3 +1,5 @@
+/// <reference types="vite/client" />
+
 import { FC } from 'react';
 
 import { Link, useLocation } from 'react-router-dom';
@@ -14,9 +16,17 @@ import NotIcon from '~/app/not-icon.svg?react';
 
 import { BaseSlice } from '@/types/stores';
 
-import { selectBaseSlice, setIsCartOpen } from '@/slice/base-slide';
+import { useTonPurchase } from '@/hooks/useTonPurchase';
+import {
+    selectBaseSlice,
+    setIsCartOpen,
+    setIsFailedTransInputOpen,
+    setIsSuccessTransInputOpen,
+} from '@/slice/base-slide';
 import { selectCartPrice } from '@/slice/cart-slice';
 import { selectUserSlice } from '@/slice/user-slice';
+
+const TON_ADDRESS = import.meta.env.VITE_TON_ADDRESS as string;
 
 const NavigationMenu: FC = () => {
     const baseSlice: BaseSlice = useSelector(selectBaseSlice);
@@ -26,9 +36,23 @@ const NavigationMenu: FC = () => {
     const { pathname } = useLocation();
     const dispatch = useDispatch();
 
-    const handleClickCartButton = () => {
+    const { sendPayment, reset } = useTonPurchase();
+
+    const handleSendPayment = async (amountTon: number = 0.01, recipient: string = TON_ADDRESS) => {
+        const status = await sendPayment(amountTon, recipient);
+
+        if (status === 'success') {
+            dispatch(setIsSuccessTransInputOpen(true));
+        } else {
+            dispatch(setIsFailedTransInputOpen(true));
+        }
+
+        reset();
+    };
+
+    const handleClickCartButton = async () => {
         if (!isCartOpen) dispatch(setIsCartOpen(true));
-        else console.log('isCartOpen');
+        else handleSendPayment();
     };
 
     const isStore = pathname === '/';
@@ -55,6 +79,7 @@ const NavigationMenu: FC = () => {
                         <Link
                             className={`flex flex-col items-center gap-[2px] w-[60px] no-hover`}
                             to="/"
+                            viewTransition
                         >
                             <NotIcon
                                 className={`transition-opacity duration-300 [&>path]:fill-current ${isStore ? 'no-hover' : 'opacity-20'}`}
@@ -70,6 +95,7 @@ const NavigationMenu: FC = () => {
                         <Link
                             className={`flex flex-col items-center justify-end gap-[2px] w-[60px] no-hover`}
                             to="/profile"
+                            viewTransition
                         >
                             <ImageWithPlaceholder
                                 className={`rounded-full transition-opacity duration-300 h-[24px] w-[24px] ${isProfile ? '' : 'opacity-60'}`}

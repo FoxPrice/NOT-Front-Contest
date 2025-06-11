@@ -12,6 +12,7 @@ import ProductInfo from '@/components/product/info';
 
 import { CatalogItem } from '@/types/catalog-item';
 
+import { useTelegramBackButton } from '@/hooks/useTelegramBackButton';
 import { selectIsMobileDevice } from '@/slice/base-slide';
 import { selectProductsSlice } from '@/slice/products-slice';
 
@@ -19,15 +20,16 @@ const Product: FC = () => {
     const { id } = useParams();
 
     const isMobileDevice = useSelector(selectIsMobileDevice);
-
     const product: CatalogItem | undefined = useSelector(selectProductsSlice).products.find(
         (product) => product.id === Number(id),
     );
 
+    useTelegramBackButton();
+
     if (id === 'error') {
         return (
             <div
-                className={`flex flex-col w-full ${isMobileDevice ? 'h-[calc(100vh-46px)]' : 'h-[100vh]'}`}
+                className={`flex flex-col w-full ${isMobileDevice ? 'h-[calc(100vh-80px)]' : 'h-[100vh]'}`}
             >
                 <EmptyState
                     title="Not available at the moment"
@@ -40,7 +42,7 @@ const Product: FC = () => {
     if (!product) {
         return (
             <div
-                className={`flex flex-col w-full ${isMobileDevice ? 'h-[calc(100vh-46px)]' : 'h-[100vh]'}`}
+                className={`flex flex-col w-full ${isMobileDevice ? 'h-[calc(100vh-80px)]' : 'h-[100vh]'}`}
             >
                 <EmptyState
                     title="Not available at the moment"
@@ -52,7 +54,7 @@ const Product: FC = () => {
 
     return (
         <div
-            className={`flex flex-col  w-full ${isMobileDevice ? 'h-[calc(100vh-46px)]' : 'h-[100vh]'}`}
+            className={`flex flex-col  w-full ${isMobileDevice ? 'h-[calc(100vh-80px)]' : 'h-[100vh]'}`}
         >
             <ProductHeader productName={product.name} />
             <ProductInfo product={product} />

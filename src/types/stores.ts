@@ -31,4 +31,6 @@ export type BaseSlice = {
     isCartOpen: boolean;
     tg: TelegramWebApp | null;
     isMobileDevice: boolean;
+    isSuccessTransOpen: boolean;
+    isFailedTransOpen: boolean;
 };

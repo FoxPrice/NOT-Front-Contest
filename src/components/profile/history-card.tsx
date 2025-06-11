@@ -28,6 +28,7 @@ const HistoryCard: FC<HistoryItem & { product: CatalogItem | null }> = ({
         <Link
             to={`/product/${productPath}`}
             className="grid grid-cols-[60px_1fr] gap-[12px] items-center justify-center w-full py-[4px]"
+            viewTransition
         >
             <ImageWithPlaceholder
                 className="rounded-[12px] h-[60px] w-[60px]"

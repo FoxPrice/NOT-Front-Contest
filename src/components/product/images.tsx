@@ -5,6 +5,7 @@ import ImageWithPlaceholder from '../app/image-with-placeholder';
 import productImagePlaceholder from '@/assets/img/placeholder/product.jpg';
 
 import useImageSlider from '@/hooks/useImageSlider';
+import useTransitionState from '@/hooks/useTransitionState';
 
 const ProductImages: FC<{ imgs: string[]; productName: string }> = ({ imgs, productName }) => {
     const imgsLength = imgs.length;
@@ -18,6 +19,9 @@ const ProductImages: FC<{ imgs: string[]; productName: string }> = ({ imgs, prod
         handleMouseUp,
         setActiveImageIndex,
     } = useImageSlider(imgsLength);
+
+    const src = imgs[activeImageIndex];
+    const { currentValue: currentSrc, opacity } = useTransitionState<string>(src);
 
     if (!imgs || imgsLength === 0) return null;
 
@@ -33,8 +37,9 @@ const ProductImages: FC<{ imgs: string[]; productName: string }> = ({ imgs, prod
                 className="relative w-[calc(100%-32px)] flex-1 min-h-0 mx-[16px]"
             >
                 <ImageWithPlaceholder
-                    className={`inner-container rounded-[20px] w-full h-full object-cover transition-opacity duration-300 ease-in-out`}
-                    src={imgs[activeImageIndex]}
+                    className={`inner-container rounded-[20px] w-full h-full object-cover 
+                        transition-opacity duration-300 ease-in-out ${opacity ? 'opacity-100' : 'opacity-0'}`}
+                    src={currentSrc}
                     alt={productName}
                     placeholderImg={productImagePlaceholder}
                 />

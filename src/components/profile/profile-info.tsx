@@ -11,10 +11,10 @@ import { TelegramWebAppUser } from '@/types/telegram-data';
 import { selectUserSlice } from '@/slice/user-slice';
 
 const ProfileInfo: FC = () => {
-    const avatar: string = '/avatar.png';
     const userData: TelegramWebAppUser | null = useSelector(selectUserSlice).userData;
 
     const userName: string = userData?.first_name ? userData.first_name : 'Profile';
+    const avatar: string | null = userData?.photo_url ? userData?.photo_url : null;
 
     return (
         <div className="flex flex-col gap-[8px] items-center justify-center w-full pt-[40px] pb-[32px]">

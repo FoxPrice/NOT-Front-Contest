@@ -22,6 +22,10 @@ export const useTelegramInitialization = () => {
         return telegram;
     }, [setTg]);
 
+    useEffect(() => {
+        handleGetTgWebApp();
+    }, [handleGetTgWebApp]);
+
     const handleOpenFullScreen = useCallback(() => {
         if (!tg) return;
         tg.ready();
@@ -32,11 +36,10 @@ export const useTelegramInitialization = () => {
     }, [tg]);
 
     useEffect(() => {
-        const telegram = handleGetTgWebApp();
-        if (!telegram) return;
-        const isMobileDevice = telegram.platform === 'ios' || telegram.platform === 'android';
+        if (!tg) return;
+        const isMobileDevice = (tg.platform === 'ios' || tg.platform === 'android') as boolean;
         dispatch(setIsMobileDevice(isMobileDevice));
-    }, [dispatch, handleGetTgWebApp]);
+    }, [dispatch, tg]);
 
     useEffect(() => {
         if (!tg) return;

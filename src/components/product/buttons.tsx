@@ -1,3 +1,5 @@
+/// <reference types="vite/client" />
+
 import { FC } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -9,7 +11,11 @@ import PlusIcon from '@/assets/svg/product/plus.svg?react';
 
 import { CatalogItem } from '@/types/catalog-item';
 
+import { useTonPurchase } from '@/hooks/useTonPurchase';
+import { setIsFailedTransInputOpen, setIsSuccessTransInputOpen } from '@/slice/base-slide';
 import { addToCart, removeFromCart, selectCartSlice } from '@/slice/cart-slice';
+
+const TON_ADDRESS = import.meta.env.VITE_TON_ADDRESS as string;
 
 const ProductButtons: FC<{ product: CatalogItem }> = ({ product }) => {
     const dispatch = useDispatch();
@@ -28,6 +34,20 @@ const ProductButtons: FC<{ product: CatalogItem }> = ({ product }) => {
     const handleRemoveFromCart = () => {
         if (productInCart?.count && productInCart?.count - 1 < 0) return;
         dispatch(removeFromCart({ ...product, count: 1 }));
+    };
+
+    const { sendPayment, reset } = useTonPurchase();
+
+    const handleSendPayment = async (amountTon: number = 0.01, recipient: string = TON_ADDRESS) => {
+        const status = await sendPayment(amountTon, recipient);
+
+        if (status === 'success') {
+            dispatch(setIsSuccessTransInputOpen(true));
+        } else {
+            dispatch(setIsFailedTransInputOpen(true));
+        }
+
+        reset();
     };
 
     return (
@@ -58,7 +78,7 @@ const ProductButtons: FC<{ product: CatalogItem }> = ({ product }) => {
                     <span className="button-text">Add to cart</span>
                 </button>
             )}
-            <DefaultButton className="" text="Buy now" onClick={() => {}} />
+            <DefaultButton className="" text="Buy now" onClick={() => handleSendPayment()} />
         </div>
     );
 };

@@ -17,10 +17,13 @@ const ProductCard: FC<{ product: CatalogItem; isInCart: boolean }> = ({ product,
     const productPath: string = product.id.toString() ?? 'error';
 
     return (
-        <Link to={`/product/${productPath}`} className="flex flex-col gap-[8px] no-hover">
+        <Link
+            to={`/product/${productPath}`}
+            className="flex flex-col gap-[8px] no-hover"
+            viewTransition
+        >
             <div
                 className="relative flex rounded-[16px] w-full aspect-square overflow-hidden"
-                onClick={handleSliderClick}
                 onMouseDown={handleSliderClick}
             >
                 <ProductImgs imgs={product.images} />

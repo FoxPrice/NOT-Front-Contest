@@ -15,7 +15,7 @@ export const useInitialHistory = () => {
         const handleGetInitialHistoryData = async () => {
             try {
                 const res: ApiResponse<HistoryItem[]> =
-                    await PurchaseHistoryService.getNoPurchaseHistory();
+                    await PurchaseHistoryService.getPurchaseHistory();
                 dispatch(setHistory(res.data));
             } catch {
                 dispatch(setHistory([]));

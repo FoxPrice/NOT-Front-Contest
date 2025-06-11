@@ -33,6 +33,7 @@ const ItemInCart: FC<{ product: CartItem }> = ({ product }) => {
         <Link
             to={`/product/${productPath}`}
             className="grid grid-cols-[60px_1fr] gap-[12px] items-center justify-center w-full py-[4px] no-hover"
+            viewTransition
         >
             <ImageWithPlaceholder
                 className="rounded-[12px] h-[60px] w-[60px]"

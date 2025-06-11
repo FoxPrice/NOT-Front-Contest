@@ -14,6 +14,8 @@ const initialBaseState: BaseSlice = {
     isCartOpen: false,
     tg: null,
     isMobileDevice: false,
+    isSuccessTransOpen: false,
+    isFailedTransOpen: false,
 };
 
 const baseSlice = createSlice({
@@ -58,6 +60,18 @@ const baseSlice = createSlice({
                 isCartOpen: action.payload,
             };
         },
+        setIsSuccessTransInputOpen: (state: BaseSlice, action: PayloadAction<boolean>) => {
+            return {
+                ...state,
+                isSuccessTransOpen: action.payload,
+            };
+        },
+        setIsFailedTransInputOpen: (state: BaseSlice, action: PayloadAction<boolean>) => {
+            return {
+                ...state,
+                isFailedTransOpen: action.payload,
+            };
+        },
     },
 });
 
@@ -68,6 +82,8 @@ export const {
     setIsSearchInputOpen,
     setTgValue,
     setIsMobileDevice,
+    setIsSuccessTransInputOpen,
+    setIsFailedTransInputOpen,
 } = baseSlice.actions;
 
 export const selectBaseSlice = (state: RootState): BaseSlice => state.base;

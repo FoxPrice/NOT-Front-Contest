@@ -1,8 +1,12 @@
 import { useState } from 'react';
 
+import { useVibration } from '@/hooks/useVibration';
+
 const swipeLength: number = 40;
 
 const useImageSlider = (imgsLength: number) => {
+    const { handleVibrate } = useVibration();
+
     const [activeImageIndex, setActiveImageIndex] = useState(0);
     const [touchStart, setTouchStart] = useState<number | null>(null);
     const [mouseStart, setMouseStart] = useState<number | null>(null);
@@ -25,6 +29,7 @@ const useImageSlider = (imgsLength: number) => {
     const swipeHandler = (diff: number) => {
         if (Math.abs(diff) < swipeLength) return;
 
+        handleVibrate();
         if (diff > 0) {
             setActiveImageIndex((prev) => (prev < imgsLength - 1 ? prev + 1 : 0));
         } else {
