@@ -16,6 +16,7 @@ A modern web application built for the [NOT Contest](https://contest.notco.in/de
 ## Technology Stack
 
 ### Core Technologies
+
 - **React** (v19.1.0) - Frontend framework
 - **TypeScript** (v5.8.3) - Type-safe JavaScript
 - **Redux Toolkit** (v2.8.2) - State management
@@ -24,6 +25,7 @@ A modern web application built for the [NOT Contest](https://contest.notco.in/de
 - **Tailwind CSS** (v3.4.17) - Utility-first CSS framework
 
 ### Development Tools
+
 - **Vite** (v6.3.5) - Build tool and development server
 - **ESLint** (v9.28.0) - Code linting
 - **Prettier** - Code formatting
@@ -56,7 +58,7 @@ A modern web application built for the [NOT Contest](https://contest.notco.in/de
 ```
 ton-contest/
 ├── src/
-│   ├── components/     # Reusable UI components
+│   ├── components/    # Reusable UI components
 │   ├── pages/         # Page components
 │   ├── slice/         # RTK slice configuration
 │   ├── hooks/         # Custom React hooks
@@ -67,3 +69,5 @@ ton-contest/
 ├── public/            # Public static files
 └── ...config files
 ```
+
+> 🥚 Psst... there are a few hidden Easter eggs scattered throughout the app. Can you find them all?

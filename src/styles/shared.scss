@@ -15,9 +15,15 @@
 
 /* Pulse animation for loading states */
 @keyframes pulse {
-    0% { opacity: 1; }
-    50% { opacity: 0.6; }
-    100% { opacity: 1; }
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.6;
+    }
+    100% {
+        opacity: 1;
+    }
 }
 
 /* Loading skeleton with pulse animation */
@@ -34,8 +40,12 @@
 
 /* Slide-up animation for nav menu */
 @keyframes nav-menu-first-render {
-    0% { transform: translateY(100%); }
-    100% { transform: translateY(0); }
+    0% {
+        transform: translateY(100%);
+    }
+    100% {
+        transform: translateY(0);
+    }
 }
 
 /* Fullscreen overlay with blur */
