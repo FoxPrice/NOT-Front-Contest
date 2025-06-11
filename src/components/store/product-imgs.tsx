@@ -1,5 +1,7 @@
 import { FC } from 'react';
 
+import { useNavigate } from 'react-router-dom';
+
 import ImageWithPlaceholder from '@/components/app/image-with-placeholder';
 import ProductImgsDots from '@/components/store/imgs-slider-dots';
 
@@ -7,18 +9,20 @@ import productImagePlaceholder from '@/assets/img/placeholder/product.jpg';
 
 import useImageSlider from '@/hooks/useImageSlider';
 
-const ProductImgs: FC<{ imgs: string[] }> = ({ imgs }) => {
+const ProductImgs: FC<{ imgs: string[]; productID: number }> = ({ imgs, productID }) => {
     const imgsLength = imgs.length;
+    const navigate = useNavigate();
+
+    const handleClick = () => navigate(`/product/${productID}`);
 
     const {
         activeImageIndex,
-        isDragging,
         handleTouchStart,
         handleTouchEnd,
         handleMouseDown,
         handleMouseMove,
         handleMouseUp,
-    } = useImageSlider(imgsLength);
+    } = useImageSlider(imgsLength, handleClick);
 
     return (
         <div
@@ -36,12 +40,9 @@ const ProductImgs: FC<{ imgs: string[] }> = ({ imgs }) => {
                     src={img}
                     alt=""
                     placeholderImg={productImagePlaceholder}
-                    className="absolute top-0 left-0 w-full h-full"
-                    style={{
-                        opacity: index === activeImageIndex ? 1 : 0,
-                        transition: 'opacity 0.3s ease-in-out',
-                        cursor: isDragging ? 'grabbing' : 'grab',
-                    }}
+                    className={`absolute top-0 left-0 w-full h-full transition-opacity duration-300 ease-in-out ${
+                        index === activeImageIndex ? 'opacity-100' : 'opacity-0'
+                    }`}
                 />
             ))}
             <ProductImgsDots

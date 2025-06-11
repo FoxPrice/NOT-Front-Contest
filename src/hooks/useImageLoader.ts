@@ -1,7 +1,7 @@
 import { useState, useCallback, useEffect } from 'react';
 
 export const useImageLoader = (
-    src: string | undefined,
+    src: string | null | undefined,
     placeholderImg: string,
     isVisible: boolean,
 ) => {
@@ -35,11 +35,10 @@ export const useImageLoader = (
 
         setIsLoading(true);
 
-        if (!src) {
-            return;
-        }
+        if (src === null) loadPlaceholder();
+        else if (!src) return;
 
-        handleLoadImg(src, loadPlaceholder);
+        if (src) handleLoadImg(src, loadPlaceholder);
     }, [src, loadPlaceholder, isVisible]);
 
     return {

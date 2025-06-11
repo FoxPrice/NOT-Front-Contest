@@ -11,18 +11,21 @@ import { BaseSlice } from '@/types/stores';
 import {
     selectBaseSlice,
     setIsCartOpen,
+    setIsSearchInputOpen,
     setIsSearchInputFocused,
     setSearchInputValue,
 } from '@/slice/base-slide';
+import { selectCartSlice } from '@/slice/cart-slice';
 
 const Header: FC = () => {
     const baseSlice: BaseSlice = useSelector(selectBaseSlice);
+    const cartCount: number = useSelector(selectCartSlice).count;
     const dispatch = useDispatch();
 
     const inputRef = useRef<HTMLInputElement>(null);
 
     const handleSearchInputFocus = () => {
-        dispatch(setIsSearchInputFocused(true));
+        dispatch(setIsSearchInputOpen(true));
 
         setTimeout(() => {
             handleInputFocus();
@@ -30,7 +33,7 @@ const Header: FC = () => {
     };
 
     const handleSearchInputClose = () => {
-        dispatch(setIsSearchInputFocused(false));
+        dispatch(setIsSearchInputOpen(false));
     };
 
     const handleSearchValueClear = () => {
@@ -46,26 +49,43 @@ const Header: FC = () => {
     };
 
     const handleInputFocus = () => {
+        dispatch(setIsSearchInputFocused(true));
+
         if (inputRef.current) {
             inputRef.current.focus();
         }
     };
 
-    const isSearchInputFocused: boolean = baseSlice.isSearchInputFocused;
+    const handleSearchInputBlur = () => {
+        dispatch(setIsSearchInputFocused(false));
+    };
+
+    const isSearchInputOpen: boolean = baseSlice.isSearchInputOpen;
     const inputValue: string = baseSlice.searchInputValue || '';
 
     return (
         <header className="inner-container flex h-[60px]">
-            {!isSearchInputFocused ? (
+            {!isSearchInputOpen ? (
                 <div className="flex items-center justify-between w-full h-full">
                     <h1 className="title">Not Store</h1>
                     <div className="flex gap-[8px]">
                         <button onClick={handleSearchInputFocus} className="w-[28px] h-[28px]">
                             <SearchIcon />
                         </button>
-                        <button onClick={handleCartOpen} className="w-[28px] h-[28px]">
-                            <CartIcon />
-                        </button>
+                        {cartCount && cartCount > 0 ? (
+                            <button
+                                onClick={handleCartOpen}
+                                className="flex items-center justify-center min-w-[28px] h-[28px] rounded-full overflow-hidden bg-main-text-color"
+                            >
+                                <span className="text-theme-color text-center px-[4px]">
+                                    {cartCount}
+                                </span>
+                            </button>
+                        ) : (
+                            <button onClick={handleCartOpen} className="w-[28px] h-[28px]">
+                                <CartIcon />
+                            </button>
+                        )}
                     </div>
                 </div>
             ) : (
@@ -79,6 +99,7 @@ const Header: FC = () => {
                             ref={inputRef}
                             value={inputValue}
                             onChange={handleSearchInputChange}
+                            onBlur={handleSearchInputBlur}
                             type="text"
                             placeholder="Search"
                             className="w-full h-full"

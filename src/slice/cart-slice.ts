@@ -53,6 +53,13 @@ const cartSlice = createSlice({
                 };
             }
         },
+        deleteFromCart: (state: CartSlice, action: PayloadAction<CartItem>) => {
+            return {
+                ...state,
+                cart: state.cart.filter((item) => item.id !== action.payload.id),
+                count: state.count - action.payload.count,
+            };
+        },
         setIsLoading: (state: CartSlice, action: PayloadAction<boolean>) => {
             return {
                 ...state,
@@ -62,8 +69,10 @@ const cartSlice = createSlice({
     },
 });
 
-export const { addToCart, removeFromCart, setIsLoading } = cartSlice.actions;
+export const { addToCart, removeFromCart, setIsLoading, deleteFromCart } = cartSlice.actions;
 
 export const selectCartSlice = (state: RootState): CartSlice => state.cart;
+export const selectCartPrice = (state: RootState): number =>
+    state.cart.cart.reduce((acc, product) => acc + product.price * product.count, 0);
 
 export default cartSlice.reducer;

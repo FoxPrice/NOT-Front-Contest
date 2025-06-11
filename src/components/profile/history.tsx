@@ -2,7 +2,7 @@ import { FC, useRef } from 'react';
 
 import { useSelector } from 'react-redux';
 
-import HistoryEmptyState from '@/components/emptyState/history-empty-state';
+import EmptyState from '@/components/app/empty-state';
 import HistoryCard from '@/components/profile/history-card';
 import HistorySkeleton from '@/components/skeletons/history-skeleton';
 
@@ -35,7 +35,7 @@ const History: FC = () => {
     }
 
     if (!history || history.length === 0) {
-        return <HistoryEmptyState />;
+        return <EmptyState title="No history yet" descr="Let’s change that" />;
     }
 
     const displayedHistory = history.slice(0, visibleItems);

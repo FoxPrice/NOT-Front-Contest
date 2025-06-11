@@ -3,6 +3,12 @@
     margin: 0 auto;
 }
 
+.no-select {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
 @keyframes pulse {
     0% {
         opacity: 1;

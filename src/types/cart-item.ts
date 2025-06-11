@@ -5,6 +5,6 @@ export type CartItem = {
     price: number;
     currency: string;
     left: number;
-    image: string;
+    images: string[];
     count: number;
 };

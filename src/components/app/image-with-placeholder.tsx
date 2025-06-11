@@ -5,7 +5,7 @@ import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
 
 type ImageWithPlaceholderProps = {
     className?: string | undefined;
-    src?: string;
+    src?: string | null;
     alt?: string;
     placeholderImg: string;
     style?: CSSProperties;

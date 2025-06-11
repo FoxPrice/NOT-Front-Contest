@@ -26,6 +26,7 @@ export type CartSlice = {
 
 export type BaseSlice = {
     searchInputValue: string;
+    isSearchInputOpen: boolean;
     isSearchInputFocused: boolean;
     isCartOpen: boolean;
 };
