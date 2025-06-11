@@ -43,7 +43,7 @@ const NavigationMenu: FC = () => {
 
         if (status === 'success') {
             dispatch(setIsSuccessTransInputOpen(true));
-        } else {
+        } else if (status === 'error') {
             dispatch(setIsFailedTransInputOpen(true));
         }
 

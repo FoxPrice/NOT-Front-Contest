@@ -1,7 +1,7 @@
 import { CartItem } from './cart-item';
 import { CatalogItem } from './catalog-item';
 import { HistoryItem } from './history-item';
-import { TelegramWebApp, TelegramWebAppUser } from './telegram-data';
+import { TelegramWebAppUser } from './telegram-data';
 
 export type CatalogSlice = {
     products: CatalogItem[] | [];
@@ -29,7 +29,6 @@ export type BaseSlice = {
     isSearchInputOpen: boolean;
     isSearchInputFocused: boolean;
     isCartOpen: boolean;
-    tg: TelegramWebApp | null;
     isMobileDevice: boolean;
     isSuccessTransOpen: boolean;
     isFailedTransOpen: boolean;

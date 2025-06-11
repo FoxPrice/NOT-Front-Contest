@@ -41,14 +41,14 @@ const ItemInCart: FC<{ product: CartItem }> = ({ product }) => {
                 alt="Avatar"
                 placeholderImg={productImagePlaceholder}
             />
-            <div className="flex items-center w-full justify-between">
-                <div className="flex flex-col items-start">
+            <div className="flex items-center w-full justify-between gap-[20px]">
+                <div className="flex flex-col items-start min-w-0 flex-1">
                     <span className="product-info text-secondary-text-color">
                         {productCategory}
                     </span>
-                    <span>{productName}</span>
+                    <span className="text-overflow w-full">{productName}</span>
                 </div>
-                <div className="flex gap-[12px] items-end">
+                <div className="flex gap-[12px] items-end flex-shrink-0">
                     <span>{`${total} ${currency} ${count > 1 ? `x ${count}` : ''}`}</span>
                     <button onClick={handleDeleteFromCart} className="w-[28px] h-[28px]">
                         <DeleteIcon />

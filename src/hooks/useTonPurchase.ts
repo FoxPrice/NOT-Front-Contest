@@ -32,6 +32,7 @@ export function useTonPurchase() {
                     await tonConnectUI.openModal();
 
                     wallet = tonConnectUI.account;
+
                     if (!wallet) {
                         setStatus('idle');
                         return 'cancelled';

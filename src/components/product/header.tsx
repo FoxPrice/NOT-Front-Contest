@@ -1,16 +1,19 @@
 import { FC } from 'react';
 
-import { useSelector } from 'react-redux';
-
 import ShareIcon from '@/assets/svg/product/share.svg?react';
 
-import { selectTg } from '@/slice/base-slide';
+import { useTelegramWebAppContext } from '@/context/telegram-web-app-context';
 
 const ProductHeader: FC<{ productName: string }> = ({ productName }) => {
-    const tg = useSelector(selectTg);
+    const { tg } = useTelegramWebAppContext();
+
     const handleShareWithFriend = () => {
-        if (!tg || !tg?.shareMessage) return;
-        tg?.shareMessage('1', () => console.log('success'));
+        if (!tg) return;
+        const botUrl = `https://t.me/Fox_NOT_Frontend_Contest_Bot?startapp`;
+        const shareText = 'Check it out!';
+        const telegramShareUrl = `https://t.me/share/url?url=${encodeURIComponent(botUrl)}&text=${encodeURIComponent(shareText)}`;
+
+        tg.openTelegramLink(telegramShareUrl);
     };
 
     return (

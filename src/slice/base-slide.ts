@@ -5,14 +5,12 @@ import { disableScroll, enableScroll } from '@/utils/scroll-handler';
 import { RootState } from './index';
 
 import { BaseSlice } from '@/types/stores';
-import { TelegramWebApp } from '@/types/telegram-data';
 
 const initialBaseState: BaseSlice = {
     searchInputValue: '',
     isSearchInputOpen: false,
     isSearchInputFocused: false,
     isCartOpen: false,
-    tg: null,
     isMobileDevice: false,
     isSuccessTransOpen: false,
     isFailedTransOpen: false,
@@ -26,12 +24,6 @@ const baseSlice = createSlice({
             return {
                 ...state,
                 searchInputValue: action.payload,
-            };
-        },
-        setTgValue: (state: BaseSlice, action: PayloadAction<TelegramWebApp>) => {
-            return {
-                ...state,
-                tg: action.payload,
             };
         },
         setIsMobileDevice: (state: BaseSlice, action: PayloadAction<boolean>) => {
@@ -80,14 +72,12 @@ export const {
     setIsSearchInputFocused,
     setIsCartOpen,
     setIsSearchInputOpen,
-    setTgValue,
     setIsMobileDevice,
     setIsSuccessTransInputOpen,
     setIsFailedTransInputOpen,
 } = baseSlice.actions;
 
 export const selectBaseSlice = (state: RootState): BaseSlice => state.base;
-export const selectTg = (state: RootState): TelegramWebApp | null => state.base.tg;
 export const selectIsMobileDevice = (state: RootState): boolean => state.base.isMobileDevice;
 
 export default baseSlice.reducer;

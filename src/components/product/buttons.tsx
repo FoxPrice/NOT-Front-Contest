@@ -43,7 +43,7 @@ const ProductButtons: FC<{ product: CatalogItem }> = ({ product }) => {
 
         if (status === 'success') {
             dispatch(setIsSuccessTransInputOpen(true));
-        } else {
+        } else if (status === 'error') {
             dispatch(setIsFailedTransInputOpen(true));
         }
 
