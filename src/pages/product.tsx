@@ -12,10 +12,13 @@ import ProductInfo from '@/components/product/info';
 
 import { CatalogItem } from '@/types/catalog-item';
 
+import { selectIsMobileDevice } from '@/slice/base-slide';
 import { selectProductsSlice } from '@/slice/products-slice';
 
 const Product: FC = () => {
     const { id } = useParams();
+
+    const isMobileDevice = useSelector(selectIsMobileDevice);
 
     const product: CatalogItem | undefined = useSelector(selectProductsSlice).products.find(
         (product) => product.id === Number(id),
@@ -23,7 +26,9 @@ const Product: FC = () => {
 
     if (id === 'error') {
         return (
-            <div className="flex flex-col h-[calc(100vh-46px)] w-full">
+            <div
+                className={`flex flex-col w-full ${isMobileDevice ? 'h-[calc(100vh-46px)]' : 'h-[100vh]'}`}
+            >
                 <EmptyState
                     title="Not available at the moment"
                     descr="Try choosing a different product"
@@ -34,7 +39,9 @@ const Product: FC = () => {
 
     if (!product) {
         return (
-            <div className="flex flex-col h-[calc(100vh-46px)] w-full">
+            <div
+                className={`flex flex-col w-full ${isMobileDevice ? 'h-[calc(100vh-46px)]' : 'h-[100vh]'}`}
+            >
                 <EmptyState
                     title="Not available at the moment"
                     descr="Try choosing a different product"
@@ -44,7 +51,9 @@ const Product: FC = () => {
     }
 
     return (
-        <div className="flex flex-col h-[calc(100vh-46px)] w-full">
+        <div
+            className={`flex flex-col  w-full ${isMobileDevice ? 'h-[calc(100vh-46px)]' : 'h-[100vh]'}`}
+        >
             <ProductHeader productName={product.name} />
             <ProductInfo product={product} />
             <ProductImages imgs={product.images} productName={product.name} />

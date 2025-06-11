@@ -47,6 +47,7 @@
         --bg-secondary-color: rgba(0, 0, 0, 0.05);
         --bg-additional-color: rgba(0, 0, 0, 0.08);
         --border-color: rgba(0, 0, 0, 0.08);
+        --skeleton-color: #F5F5F5;
     }
 
     .dark {
@@ -56,6 +57,7 @@
         --bg-secondary-color: rgba(255, 255, 255, 0.05);
         --bg-additional-color: rgba(255, 255, 255, 0.08);
         --border-color: rgba(255, 255, 255, 0.08);
+        --skeleton-color: #2a2a2a;
     }
 }
 

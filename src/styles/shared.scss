@@ -24,7 +24,7 @@
 }
 
 .skeleton {
-    background-color: #2a2a2a;
+    background-color: var(--skeleton-color);
     animation: pulse 2s ease-in-out infinite;
     user-select: none;
 }

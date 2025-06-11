@@ -30,7 +30,7 @@ const ProductImages: FC<{ imgs: string[]; productName: string }> = ({ imgs, prod
                 onMouseMove={handleMouseMove}
                 onMouseUp={handleMouseUp}
                 onMouseLeave={handleMouseUp}
-                className="relative w-full flex-1 min-h-0"
+                className="relative w-[calc(100%-32px)] flex-1 min-h-0 mx-[16px]"
             >
                 <ImageWithPlaceholder
                     className={`inner-container rounded-[20px] w-full h-full object-cover transition-opacity duration-300 ease-in-out`}

@@ -8,6 +8,7 @@ import { Provider } from 'react-redux';
 import '@/styles/index.scss';
 import { router } from '@/utils/router';
 
+import { TelegramWebAppProvider } from '@/context/telegram-web-app-context';
 import { store } from '@/slice';
 
 const rootElement = document.getElementById('root');
@@ -19,7 +20,9 @@ if (!rootElement) {
 createRoot(rootElement).render(
     <StrictMode>
         <Provider store={store}>
-            <RouterProvider router={router} />
+            <TelegramWebAppProvider>
+                <RouterProvider router={router} />
+            </TelegramWebAppProvider>
         </Provider>
     </StrictMode>,
 );

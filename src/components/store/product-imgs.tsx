@@ -1,7 +1,5 @@
 import { FC } from 'react';
 
-import { useNavigate } from 'react-router-dom';
-
 import ImageWithPlaceholder from '@/components/app/image-with-placeholder';
 import ProductImgsDots from '@/components/store/imgs-slider-dots';
 
@@ -9,11 +7,8 @@ import productImagePlaceholder from '@/assets/img/placeholder/product.jpg';
 
 import useImageSlider from '@/hooks/useImageSlider';
 
-const ProductImgs: FC<{ imgs: string[]; productID: number }> = ({ imgs, productID }) => {
+const ProductImgs: FC<{ imgs: string[] }> = ({ imgs }) => {
     const imgsLength = imgs.length;
-    const navigate = useNavigate();
-
-    const handleClick = () => navigate(`/product/${productID}`);
 
     const {
         activeImageIndex,
@@ -22,7 +17,7 @@ const ProductImgs: FC<{ imgs: string[]; productID: number }> = ({ imgs, productI
         handleMouseDown,
         handleMouseMove,
         handleMouseUp,
-    } = useImageSlider(imgsLength, handleClick);
+    } = useImageSlider(imgsLength);
 
     return (
         <div

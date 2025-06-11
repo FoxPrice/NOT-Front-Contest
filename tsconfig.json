@@ -24,7 +24,7 @@
             "@/*": ["./src/*"],
             "~/*": ["./src/assets/svg/*"]
         },
-        "typeRoots": ["./node_modules/@types"]
+        "typeRoots": ["./node_modules/@types", "./src/types"]
     },
     "include": ["**/*.ts", "**/*.tsx"],
     "exclude": ["node_modules"],

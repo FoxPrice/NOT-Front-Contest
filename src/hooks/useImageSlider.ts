@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 const swipeLength: number = 40;
 
-const useImageSlider = (imgsLength: number, handleClick?: () => void) => {
+const useImageSlider = (imgsLength: number) => {
     const [activeImageIndex, setActiveImageIndex] = useState(0);
     const [touchStart, setTouchStart] = useState<number | null>(null);
     const [mouseStart, setMouseStart] = useState<number | null>(null);
@@ -23,12 +23,7 @@ const useImageSlider = (imgsLength: number, handleClick?: () => void) => {
     };
 
     const swipeHandler = (diff: number) => {
-        if (Math.abs(diff) < swipeLength) {
-            if (handleClick) {
-                return handleClick();
-            }
-            return;
-        }
+        if (Math.abs(diff) < swipeLength) return;
 
         if (diff > 0) {
             setActiveImageIndex((prev) => (prev < imgsLength - 1 ? prev + 1 : 0));

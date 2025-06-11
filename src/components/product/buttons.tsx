@@ -34,13 +34,19 @@ const ProductButtons: FC<{ product: CatalogItem }> = ({ product }) => {
         <div className="inner-container grid grid-cols-2 items-center gap-[12px] pt-[8px] pb-[34px]">
             {productInCart && productInCart?.count !== 0 ? (
                 <div className="flex items-center gap-[12px] justify-center w-full h-[50px] bg-bg-additional-color rounded-[12px]">
-                    <button className="text-main-text-color" onClick={handleRemoveFromCart}>
+                    <button
+                        className="text-main-text-color w-[24px] h-[24px] flex items-center justify-center"
+                        onClick={handleRemoveFromCart}
+                    >
                         <MinusIcon className="[&>path]:fill-current" />
                     </button>
                     <span className="subtitle min-w-[22px] text-center">
                         {productInCart?.count}
                     </span>
-                    <button className="text-main-text-color" onClick={handleAddToCart}>
+                    <button
+                        className="text-main-text-color w-[24px] h-[24px] flex items-center justify-center"
+                        onClick={handleAddToCart}
+                    >
                         <PlusIcon className="[&>path]:fill-current" />
                     </button>
                 </div>

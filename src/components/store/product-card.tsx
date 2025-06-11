@@ -23,7 +23,7 @@ const ProductCard: FC<{ product: CatalogItem; isInCart: boolean }> = ({ product,
                 onClick={handleSliderClick}
                 onMouseDown={handleSliderClick}
             >
-                <ProductImgs productID={product.id} imgs={product.images} />
+                <ProductImgs imgs={product.images} />
                 {isInCart ? (
                     <div
                         className="absolute top-[8px] right-[8px] w-[22px] h-[22px]

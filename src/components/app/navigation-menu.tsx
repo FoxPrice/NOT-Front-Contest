@@ -57,7 +57,7 @@ const NavigationMenu: FC = () => {
                             to="/"
                         >
                             <NotIcon
-                                className={`transition-opacity duration-300 ${isStore ? 'no-hover' : 'opacity-20'}`}
+                                className={`transition-opacity duration-300 [&>path]:fill-current ${isStore ? 'no-hover' : 'opacity-20'}`}
                             />
                             <span
                                 className={`nav-menu-link transition-colors duration-300 ${isStore ? '' : 'text-secondary-text-color'}`}
