@@ -17,13 +17,30 @@ import {
 } from '@/slice/base-slide';
 import { selectCartSlice } from '@/slice/cart-slice';
 
+/**
+ * Header component for the store page.
+ * Provides search functionality and cart access with dynamic state management.
+ *
+ * Features:
+ * - Dynamic search input with focus management
+ * - Cart counter with conditional rendering
+ * - Responsive layout
+ * - State management through Redux
+ * - Keyboard accessibility
+ *
+ * @component
+ * @returns {JSX.Element} Store header with search and cart functionality
+ */
 const Header: FC = () => {
+    // Get state from Redux store
     const baseSlice: BaseSlice = useSelector(selectBaseSlice);
     const cartCount: number = useSelector(selectCartSlice).count;
     const dispatch = useDispatch();
 
+    // Ref for search input focus management
     const inputRef = useRef<HTMLInputElement>(null);
 
+    // Handle search input focus and animation
     const handleSearchInputFocus = () => {
         dispatch(setIsSearchInputOpen(true));
 
@@ -32,22 +49,27 @@ const Header: FC = () => {
         });
     };
 
+    // Close search input and reset state
     const handleSearchInputClose = () => {
         dispatch(setIsSearchInputOpen(false));
     };
 
+    // Clear search input value
     const handleSearchValueClear = () => {
         dispatch(setSearchInputValue(''));
     };
 
+    // Update search input value
     const handleSearchInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         dispatch(setSearchInputValue(e.target.value));
     };
 
+    // Open cart modal
     const handleCartOpen = () => {
         dispatch(setIsCartOpen(true));
     };
 
+    // Focus search input and update state
     const handleInputFocus = () => {
         dispatch(setIsSearchInputFocused(true));
 
@@ -56,10 +78,12 @@ const Header: FC = () => {
         }
     };
 
+    // Handle search input blur
     const handleSearchInputBlur = () => {
         dispatch(setIsSearchInputFocused(false));
     };
 
+    // Extract state values
     const isSearchInputOpen: boolean = baseSlice.isSearchInputOpen;
     const inputValue: string = baseSlice.searchInputValue || '';
 

@@ -14,9 +14,28 @@ import { useInfiniteScroll } from '@/hooks/useInfiniteScroll';
 import { selectHistorySlice } from '@/slice/history-slice';
 import { selectProductsSlice } from '@/slice/products-slice';
 
+/**
+ * Number of history items to load per scroll
+ */
 const ITEMS_PER_LOAD: number = 25;
 
+/**
+ * History component that displays a list of past purchases with infinite scroll.
+ * Shows loading state, empty state, and dynamically loads more items on scroll.
+ *
+ * Features:
+ * - Infinite scroll pagination
+ * - Loading skeleton state
+ * - Empty state handling
+ * - Dynamic product data matching
+ * - Responsive grid layout
+ * - Lazy loading of history items
+ *
+ * @component
+ * @returns {JSX.Element} History section with purchase records or loading/empty states
+ */
 const History: FC = () => {
+    // Get history and products data from Redux store
     const historyData: HistorySlice = useSelector(selectHistorySlice);
     const productsData: CatalogSlice = useSelector(selectProductsSlice);
     const loadMoreRef = useRef<HTMLDivElement>(null);
@@ -24,20 +43,24 @@ const History: FC = () => {
     const history: HistoryItem[] | null = historyData.history;
     const products: CatalogItem[] | null = productsData.products;
 
+    // Infinite scroll hook for pagination
     const { visibleItems } = useInfiniteScroll({
         totalItems: history?.length || 0,
         itemsPerLoad: ITEMS_PER_LOAD,
         targetRef: loadMoreRef,
     });
 
+    // Show loading skeleton while data is being fetched
     if (historyData.isLoading || productsData.isLoading) {
         return <HistorySkeleton />;
     }
 
+    // Show empty state if no history items
     if (!history || history.length === 0) {
         return <EmptyState title="No history yet" descr="Let’s change that" />;
     }
 
+    // Get currently visible history items
     const displayedHistory = history.slice(0, visibleItems);
 
     return (

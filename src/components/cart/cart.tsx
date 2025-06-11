@@ -14,17 +14,35 @@ import { CartSlice } from '@/types/stores';
 import { selectBaseSlice, setIsCartOpen } from '@/slice/base-slide';
 import { selectCartPrice, selectCartSlice } from '@/slice/cart-slice';
 
+/**
+ * Shopping cart component that displays a list of items and total amount.
+ * Implements animated appearance/disappearance and state management through Redux.
+ *
+ * Features:
+ * - Animated slide-up from bottom
+ * - Background overlay on open
+ * - Empty state display when no items
+ *
+ * @component
+ * @returns {JSX.Element | null} Cart modal or null if cart is closed
+ */
 const Cart: FC = () => {
+    // Get cart data and state from Redux
     const cartData: CartSlice = useSelector(selectCartSlice);
     const isCartOpen: boolean = useSelector(selectBaseSlice).isCartOpen;
     const totalPrice: number = useSelector(selectCartPrice);
 
     const cartProducts: CartItem[] = cartData.cart;
 
+    // Local state for animation
     const [isVisible, setIsVisible] = useState(false);
 
     const dispatch = useDispatch();
 
+    /**
+     * Cart close handler with animation.
+     * Triggers fade-out animation first, then updates Redux state
+     */
     const handleCloseCart = () => {
         setIsVisible(false);
         setTimeout(() => {
@@ -32,6 +50,7 @@ const Cart: FC = () => {
         }, 300);
     };
 
+    // Show cart with animation when Redux state changes
     useEffect(() => {
         if (isCartOpen) {
             setIsVisible(true);

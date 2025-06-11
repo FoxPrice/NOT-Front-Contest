@@ -17,15 +17,33 @@ import { selectBaseSlice } from '@/slice/base-slide';
 import { selectCartSlice } from '@/slice/cart-slice';
 import { selectProductsSlice } from '@/slice/products-slice';
 
+/**
+ * Product list component that displays a grid of products with search and filtering.
+ * Handles loading states, empty states, and cart integration.
+ *
+ * Features:
+ * - Responsive two-column grid layout
+ * - Product search functionality
+ * - Loading skeleton state
+ * - Empty state handling
+ * - Cart status integration
+ * - Dynamic product filtering
+ *
+ * @component
+ * @returns {JSX.Element} Grid of product cards with search and filtering
+ */
 const ProductList: FC = () => {
+    // Get data from Redux store
     const productsInfo: CatalogSlice = useSelector(selectProductsSlice);
     const productSearchValue: string = useSelector(selectBaseSlice).searchInputValue;
     const cartItems: CartItem[] = useSelector(selectCartSlice).cart;
 
+    // Show loading skeleton while products are being fetched
     if (productsInfo.isLoading) {
         return <ProductListSkeleton />;
     }
 
+    // Show empty state if no products available
     if (productsInfo.products.length === 0) {
         return (
             <EmptyState
@@ -36,10 +54,12 @@ const ProductList: FC = () => {
         );
     }
 
+    // Filter products based on search input
     const filteredProducts = productsInfo.products.filter((product) =>
         searchInProduct(product, productSearchValue),
     );
 
+    // Show not found state if search yields no results
     if (filteredProducts.length === 0) {
         return (
             <EmptyState

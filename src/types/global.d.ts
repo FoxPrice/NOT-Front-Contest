@@ -1,8 +1,12 @@
+/** Global type declarations for Telegram WebApp integration */
 export {};
 
 declare global {
+    /** Extends Window interface with Telegram WebApp API */
     interface Window {
+        /** Telegram WebApp API interface */
         Telegram?: {
+            /** Core WebApp functionality for Telegram client integration */
             WebApp: {
                 ready: () => void;
                 expand: () => void;

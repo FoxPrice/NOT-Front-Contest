@@ -13,14 +13,39 @@ import { CatalogItem } from '@/types/catalog-item';
 
 import { useTonPurchase } from '@/hooks/useTonPurchase';
 import { setIsFailedTransInputOpen, setIsSuccessTransInputOpen } from '@/slice/base-slide';
-import { addToCart, removeFromCart, selectCartSlice } from '@/slice/cart-slice';
+import { addToCart, clearCart, removeFromCart, selectCartSlice } from '@/slice/cart-slice';
 
+/**
+ * TON wallet address for payments.
+ * Retrieved from environment variables for security
+ */
 const TON_ADDRESS = import.meta.env.VITE_TON_ADDRESS as string;
 
+/**
+ * Product action buttons component that handles cart operations and purchases.
+ * Provides quantity controls for items in cart and direct purchase option.
+ *
+ * Features:
+ * - Add/remove from cart with quantity controls
+ * - Direct purchase with TON payment integration
+ * - Stock limit validation
+ * - Success/failure transaction handling
+ * - Responsive button layout
+ *
+ * @component
+ * @param {Object} props - Component props
+ * @param {CatalogItem} props.product - Product data for cart operations and purchase
+ * @returns {JSX.Element} Product action buttons with cart controls and purchase option
+ */
 const ProductButtons: FC<{ product: CatalogItem }> = ({ product }) => {
     const dispatch = useDispatch();
+    // Check if product is already in cart
     const productInCart = useSelector(selectCartSlice).cart.find((item) => item.id === product.id);
 
+    /**
+     * Adds product to cart with quantity validation.
+     * Prevents adding more items than available in stock
+     */
     const handleAddToCart = () => {
         if (productInCart?.count && productInCart?.count + 1 > product.left) return;
         dispatch(
@@ -31,18 +56,31 @@ const ProductButtons: FC<{ product: CatalogItem }> = ({ product }) => {
         );
     };
 
+    /**
+     * Removes product from cart with quantity validation.
+     * Prevents negative quantity values
+     */
     const handleRemoveFromCart = () => {
         if (productInCart?.count && productInCart?.count - 1 < 0) return;
         dispatch(removeFromCart({ ...product, count: 1 }));
     };
 
+    // TON payment integration hook
     const { sendPayment, reset } = useTonPurchase();
 
+    /**
+     * Handles TON payment process with transaction status handling.
+     * Shows success or failure popup based on transaction result
+     *
+     * @param {number} amountTon - Amount in TON to send (default: 0.01)
+     * @param {string} recipient - Recipient TON address (default: TON_ADDRESS)
+     */
     const handleSendPayment = async (amountTon: number = 0.01, recipient: string = TON_ADDRESS) => {
         const status = await sendPayment(amountTon, recipient);
 
         if (status === 'success') {
             dispatch(setIsSuccessTransInputOpen(true));
+            dispatch(clearCart());
         } else if (status === 'error') {
             dispatch(setIsFailedTransInputOpen(true));
         }

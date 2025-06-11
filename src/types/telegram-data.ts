@@ -1,3 +1,4 @@
+/** Telegram WebApp user data type */
 export type TelegramWebAppUser = {
     id: number;
     first_name: string;
@@ -7,6 +8,7 @@ export type TelegramWebAppUser = {
     photo_url?: string;
 };
 
+/** Telegram WebApp API interface type */
 export type TelegramWebApp = {
     ready: () => void;
     expand: () => void;

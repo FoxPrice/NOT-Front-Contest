@@ -7,9 +7,28 @@ import productImagePlaceholder from '@/assets/img/placeholder/product.jpg';
 
 import useImageSlider from '@/hooks/useImageSlider';
 
+/**
+ * Product image slider component with touch and mouse drag support.
+ * Displays product images with smooth transitions and navigation dots.
+ *
+ * Features:
+ * - Touch and mouse drag navigation
+ * - Smooth image transitions
+ * - Navigation dots indicator
+ * - Image placeholder support
+ * - Responsive image sizing
+ * - Accessibility considerations
+ *
+ * @component
+ * @param {Object} props - Component props
+ * @param {string[]} props.imgs - Array of image URLs to display
+ * @returns {JSX.Element} Interactive image slider with navigation
+ */
 const ProductImgs: FC<{ imgs: string[] }> = ({ imgs }) => {
+    // Get total number of images for navigation
     const imgsLength = imgs.length;
 
+    // Get slider controls from custom hook
     const {
         activeImageIndex,
         handleTouchStart,
@@ -35,7 +54,7 @@ const ProductImgs: FC<{ imgs: string[] }> = ({ imgs }) => {
                     src={img}
                     alt=""
                     placeholderImg={productImagePlaceholder}
-                    className={`absolute top-0 left-0 w-full h-full transition-opacity duration-300 ease-in-out ${
+                    className={`absolute top-0 left-0 w-full h-full transition-opacity duration-300 ease-in-out object-cover object-center ${
                         index === activeImageIndex ? 'opacity-100' : 'opacity-0'
                     }`}
                 />

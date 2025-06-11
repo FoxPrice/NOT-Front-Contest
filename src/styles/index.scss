@@ -1,16 +1,13 @@
+/* Main styles file that combines all global styles, theme variables, and base component styles */
+
+/* Import shared styles and Tailwind */
 @use './shared.scss';
 @use './text.scss';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-// @font-face {
-//     font-family: "SF Pro";
-//     font-style: normal;
-//     font-weight: 300;
-//     src: url("../fonts/SFProText-Light.ttf") format("truetype");
-// }
-
+/* SF Pro font declarations for different weights */
 @font-face {
     font-family: 'SF Pro';
     font-style: normal;
@@ -21,7 +18,7 @@
 @font-face {
     font-family: 'SF Pro';
     font-style: normal;
-    font-weight: 510;
+    font-weight: 510; 
     src: url('../fonts/SFProText-Medium.ttf') format('truetype');
 }
 
@@ -32,24 +29,20 @@
     src: url('../fonts/SFProText-Semibold.ttf') format('truetype');
 }
 
-// @font-face {
-//     font-family: "SF Pro";
-//     font-style: normal;
-//     font-weight: 700;
-//     src: url("../fonts/SFProText-Bold.ttf") format("truetype");
-// }
-
+/* Theme variables for light and dark modes */
 @layer base {
+    /* Light theme color variables */
     :root {
-        --main-text-color: #000;
-        --secondary-text-color: rgba(0, 0, 0, 0.5);
-        --theme-color: #fff;
-        --bg-secondary-color: rgba(0, 0, 0, 0.05);
-        --bg-additional-color: rgba(0, 0, 0, 0.08);
-        --border-color: rgba(0, 0, 0, 0.08);
-        --skeleton-color: #f5f5f5;
+        --main-text-color: #000; /* Primary text color */
+        --secondary-text-color: rgba(0, 0, 0, 0.5); /* Secondary text with opacity */
+        --theme-color: #fff; /* Main background color */
+        --bg-secondary-color: rgba(0, 0, 0, 0.05); /* Secondary background */
+        --bg-additional-color: rgba(0, 0, 0, 0.08); /* Additional background */
+        --border-color: rgba(0, 0, 0, 0.08); /* Border color */
+        --skeleton-color: #f5f5f5; /* Loading skeleton color */
     }
 
+    /* Dark theme color variables */
     .dark {
         --main-text-color: #fff;
         --secondary-text-color: rgba(255, 255, 255, 0.5);
@@ -61,6 +54,7 @@
     }
 }
 
+/* Global styles for root elements */
 html,
 body,
 .app,
@@ -78,11 +72,12 @@ body,
     overflow-x: hidden;
     position: relative;
     background-color: var(--theme-color);
-    overscroll-behavior: none;
+    overscroll-behavior: none; /* Prevent bounce effect on mobile */
     scroll-behavior: smooth;
-    min-height: 100dvh;
+    min-height: 100dvh; /* Use dynamic viewport height */
 }
 
+/* Container styles for desktop */
 html {
     max-width: 500px;
 
@@ -91,10 +86,12 @@ html {
     }
 }
 
+/* Force vertical scroll to be always visible */
 body {
     overflow-y: visible !important;
 }
 
+/* Common styles for interactive elements */
 a,
 button {
     outline: none;
@@ -108,6 +105,7 @@ button {
     transition: opacity 0.3s;
     display: inline-block;
 
+    /* Hover effect only for devices with hover capability */
     @media (hover: hover) {
         &:not(.no-hover):hover {
             opacity: 0.7;
@@ -115,6 +113,7 @@ button {
     }
 }
 
+/* Input field styles */
 input {
     outline: none !important;
     border: none;
@@ -123,15 +122,18 @@ input {
     color: inherit;
     color: var(--main-text-color);
 
+    /* Placeholder text color */
     &::placeholder {
         color: var(--secondary-text-color);
     }
 }
 
+/* Remove default list styling */
 ul {
     list-style: none;
 }
 
+/* Remove number input spinners */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -139,11 +141,12 @@ input::-webkit-inner-spin-button {
     margin: 0;
 }
 
+/* Disable interaction with images and SVGs */
 img,
 svg {
-    pointer-events: none !important;
-    -webkit-user-drag: none !important;
-    -moz-user-select: none !important;
+    pointer-events: none !important; /* Prevent click events */
+    -webkit-user-drag: none !important; /* Prevent drag */
+    -moz-user-select: none !important; /* Prevent selection */
     -webkit-user-select: none !important;
     -ms-user-select: none !important;
     user-select: none !important;

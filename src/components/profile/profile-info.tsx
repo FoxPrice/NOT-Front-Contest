@@ -10,9 +10,25 @@ import { TelegramWebAppUser } from '@/types/telegram-data';
 
 import { selectUserSlice } from '@/slice/user-slice';
 
+/**
+ * Profile information component that displays user data from Telegram.
+ * Shows user avatar and name with fallback values.
+ *
+ * Features:
+ * - User avatar with placeholder
+ * - User name display
+ * - Telegram WebApp integration
+ * - Responsive layout
+ * - Fallback values for missing data
+ *
+ * @component
+ * @returns {JSX.Element} Profile section with user avatar and name
+ */
 const ProfileInfo: FC = () => {
+    // Get user data from Redux store
     const userData: TelegramWebAppUser | null = useSelector(selectUserSlice).userData;
 
+    // Extract user data with fallback values
     const userName: string = userData?.first_name ? userData.first_name : 'Profile';
     const avatar: string | null = userData?.photo_url ? userData?.photo_url : null;
 

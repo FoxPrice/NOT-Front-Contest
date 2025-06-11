@@ -2,6 +2,23 @@ import { FC } from 'react';
 
 import { CatalogItem } from '@/types/catalog-item';
 
+/**
+ * Product information component that displays product details.
+ * Renders product description and a horizontal scrollable list of product attributes.
+ *
+ * Features:
+ * - Product description display
+ * - Price and currency information
+ * - Stock availability indicator
+ * - Product tags and attributes
+ * - Horizontal scrollable metadata list
+ * - Responsive layout with text truncation
+ *
+ * @component
+ * @param {Object} props - Component props
+ * @param {CatalogItem} props.product - Product data including description, price, and tags
+ * @returns {JSX.Element} Product information section with description.
+ */
 const ProductInfo: FC<{ product: CatalogItem }> = ({ product }) => {
     return (
         <section className="flex flex-col gap-[16px] pb-[10px] w-full min-h-fit">

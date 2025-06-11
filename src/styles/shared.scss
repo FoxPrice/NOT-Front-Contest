@@ -1,48 +1,44 @@
+/* Shared styles and utility classes */
+
+/* Container with horizontal padding */
 .inner-container {
-    width: calc(100% - 32px);
+    width: calc(100% - 32px); /* 16px padding on each side */
     margin: 0 auto;
 }
 
+/* Prevent text selection */
 .no-select {
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
 }
 
+/* Pulse animation for loading states */
 @keyframes pulse {
-    0% {
-        opacity: 1;
-    }
-
-    50% {
-        opacity: 0.6;
-    }
-
-    100% {
-        opacity: 1;
-    }
+    0% { opacity: 1; }
+    50% { opacity: 0.6; }
+    100% { opacity: 1; }
 }
 
+/* Loading skeleton with pulse animation */
 .skeleton {
     background-color: var(--skeleton-color);
     animation: pulse 2s ease-in-out infinite;
     user-select: none;
 }
 
+/* Navigation menu with entrance animation */
 .nav-menu {
     animation: nav-menu-first-render 0.8s ease-in-out;
 }
 
+/* Slide-up animation for nav menu */
 @keyframes nav-menu-first-render {
-    0% {
-        transform: translateY(100%);
-    }
-
-    100% {
-        transform: translateY(0);
-    }
+    0% { transform: translateY(100%); }
+    100% { transform: translateY(0); }
 }
 
+/* Fullscreen overlay with blur */
 .overlay {
     position: fixed;
     top: 0;
@@ -54,6 +50,7 @@
     z-index: 100;
 }
 
+/* Text truncation with ellipsis */
 .text-overflow {
     white-space: nowrap;
     overflow: hidden;

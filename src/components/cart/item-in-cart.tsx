@@ -13,7 +13,24 @@ import { CartItem } from '@/types/cart-item';
 
 import { deleteFromCart } from '@/slice/cart-slice';
 
+/**
+ * Cart item component that displays product information and allows removal.
+ * Renders as a clickable link to the product page with delete functionality.
+ *
+ * Features:
+ * - Product image with placeholder
+ * - Product name and category
+ * - Price and quantity display
+ * - Delete button with Redux integration
+ * - View transition animation on navigation
+ *
+ * @component
+ * @param {Object} props - Component props
+ * @param {CartItem} props.product - Cart item data including product details
+ * @returns {JSX.Element} Cart item card with product information
+ */
 const ItemInCart: FC<{ product: CartItem }> = ({ product }) => {
+    // Extract and provide fallback values for product data
     const productName: string = product?.name ?? 'Product name';
     const productCategory: string = product?.category ?? 'Product category';
     const productImage: string | undefined = product?.images[0] ?? '';
@@ -24,6 +41,10 @@ const ItemInCart: FC<{ product: CartItem }> = ({ product }) => {
 
     const dispatch = useDispatch();
 
+    /**
+     * Handles product removal from cart.
+     * Prevents default link behavior and dispatches delete action
+     */
     const handleDeleteFromCart = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         dispatch(deleteFromCart(product));

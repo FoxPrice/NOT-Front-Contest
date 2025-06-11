@@ -7,9 +7,27 @@ import productImagePlaceholder from '@/assets/img/placeholder/product.jpg';
 import useImageSlider from '@/hooks/useImageSlider';
 import useTransitionState from '@/hooks/useTransitionState';
 
+/**
+ * Product image gallery component with slider functionality.
+ * Features touch and mouse interactions for image navigation.
+ *
+ * Features:
+ * - Main image display with smooth transitions
+ * - Thumbnail navigation strip
+ * - Touch and mouse drag support
+ * - Image placeholder during loading
+ * - Responsive layout with aspect ratio preservation
+ *
+ * @component
+ * @param {Object} props - Component props
+ * @param {string[]} props.imgs - Array of image URLs to display
+ * @param {string} props.productName - Product name for image alt text
+ * @returns {JSX.Element | null} Image gallery with slider or null if no images
+ */
 const ProductImages: FC<{ imgs: string[]; productName: string }> = ({ imgs, productName }) => {
     const imgsLength = imgs.length;
 
+    // Image slider hook for touch and mouse interactions
     const {
         activeImageIndex,
         handleTouchStart,
@@ -20,6 +38,7 @@ const ProductImages: FC<{ imgs: string[]; productName: string }> = ({ imgs, prod
         setActiveImageIndex,
     } = useImageSlider(imgsLength);
 
+    // Current image source with transition state
     const src = imgs[activeImageIndex];
     const { currentValue: currentSrc, opacity } = useTransitionState<string>(src);
 
@@ -59,7 +78,7 @@ const ProductImages: FC<{ imgs: string[]; productName: string }> = ({ imgs, prod
                             src={image}
                             alt={productName}
                             placeholderImg={productImagePlaceholder}
-                            className="w-full h-full"
+                            className="w-full h-full object-cover object-center"
                         />
                     </button>
                 ))}
